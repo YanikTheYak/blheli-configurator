@@ -6,6 +6,9 @@ var BLHELI_S_SETTINGS_LAYOUT_33 = [
         name: 'PROGRAMMING_BY_TX', type: 'bool', label: 'escProgrammingByTX'
     },
     {
+        name: 'TEST', type: 'string', label: 'escTest'
+    },
+    {
         name: 'STARTUP_POWER', type: 'enum', options: [
             { value: '1', label: '0.031' }, { value: '2', label: '0.047' },
             { value: '3', label: '0.063' }, { value: '4', label: '0.094' },
