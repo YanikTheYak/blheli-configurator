@@ -60,6 +60,9 @@ var BLHELI_S_SETTINGS_LAYOUT_33 = [
             { value: '3', label: '5 minutes' }, { value: '4', label: '10 minutes' },
             { value: '5', label: 'Infinite' }
         ]
+    },
+    {
+        name: 'TEST', type: 'textfield', label: 'escTestLabel', placeholder: 'escTestPlaceholder'
     }
 ];
 
@@ -117,7 +120,7 @@ var BLHELI_S_SETTINGS_LAYOUT_32 = [
             { value: '3', label: '5 minutes' }, { value: '4', label: '10 minutes' },
             { value: '5', label: 'Infinite' }
         ]
-    }
+    },
 ];
 
 // layout 21, 14.5, 14.6, 14.7

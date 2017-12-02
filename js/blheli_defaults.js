@@ -16,7 +16,8 @@ var BLHELI_S_DEFAULTS = {
 		TEMPERATURE_PROTECTION:     7,
 		LOW_RPM_POWER_PROTECTION:   1,
 		BRAKE_ON_STOP:              0,
-		LED_CONTROL:                0
+		LED_CONTROL:                0,
+		TEST:						'FF01F100',
 	},
 	'32': {
 		STARTUP_POWER:              9,
@@ -33,6 +34,6 @@ var BLHELI_S_DEFAULTS = {
 		TEMPERATURE_PROTECTION:     1,
 		LOW_RPM_POWER_PROTECTION:   1,
 		BRAKE_ON_STOP:              0,
-		LED_CONTROL:                0
+		LED_CONTROL:                0,
 	}
 };

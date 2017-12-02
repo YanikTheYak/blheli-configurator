@@ -184,6 +184,16 @@
     margin-top: 0;
 }
 
+.tab-esc .textfield input {
+    float: left;
+    width: 191px;
+    height: 20px;
+    margin: 0 14px 5px 0;
+    border: 1px solid silver;
+    border-radius: 3px;
+    padding-left: 7px;    
+}
+
 .tab-esc .checkbox:last-child {
     border-bottom: none;
 }

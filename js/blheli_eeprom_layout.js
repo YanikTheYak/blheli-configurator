@@ -77,7 +77,9 @@ var BLHELI_LAYOUT = {
 
     LAYOUT:                     {   offset: 0x40, size: 16   },
     MCU:                        {   offset: 0x50, size: 16   },
-    NAME:                       {   offset: 0x60, size: 16   }
+    NAME:                       {   offset: 0x60, size: 16   },
+
+    TEST:                       {   offset: 0x80, size: 16   },
 };
 
 function blheliModeToString(mode) {
