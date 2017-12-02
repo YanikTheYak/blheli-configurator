@@ -116,6 +116,18 @@ var CommonSettings = React.createClass({
                     />
                 );
             }
+            case 'textfield': { 
+                return (
+                    <TextField 
+                        name={desc.name} 
+                        value={settings[desc.name]}
+                        placeholder={desc.placeholder} 
+                        label={desc.label} 
+                        notInSync={notInSync}
+                        onChange={this.handleChange} 
+                    /> 
+                );
+            } 
             default: throw new Error('Logic error');
         }
     }

@@ -82,3 +82,28 @@ var Number = React.createClass({
         return this.props.value;
     }
 });
+
+var TextField = React.createClass({
+    render: function render() {
+        return (
+            <div className="textfield">
+                <label>
+                    <input
+                        type={"text"}
+                        name={this.props.name}
+                        value={this.props.notInSync ? null : this.getDisplayValue()}
+                        placeholder={chrome.i18n.getMessage(this.props.placeholder)}
+                        onChange={this.handleChange}
+                    />
+                    <span className={this.props.notInSync ? "not-in-sync label" : "label"}>{chrome.i18n.getMessage(this.props.label)}</span>
+                </label>
+            </div>
+        );
+    },            
+    handleChange: function handleChange(component, value) {
+        this.props.onChange(component.props.name, value);
+    },
+    getDisplayValue: function getDisplayValue() {
+        return this.props.value;
+    }
+});
