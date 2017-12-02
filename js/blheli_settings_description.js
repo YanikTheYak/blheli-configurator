@@ -6,9 +6,6 @@ var BLHELI_S_SETTINGS_LAYOUT_33 = [
         name: 'PROGRAMMING_BY_TX', type: 'bool', label: 'escProgrammingByTX'
     },
     {
-        name: 'TEST', type: 'textfield', label: 'escTestLabel', placeholder: 'escTestPlaceholder'
-    },
-    {
         name: 'STARTUP_POWER', type: 'enum', options: [
             { value: '1', label: '0.031' }, { value: '2', label: '0.047' },
             { value: '3', label: '0.063' }, { value: '4', label: '0.094' },
@@ -63,6 +60,9 @@ var BLHELI_S_SETTINGS_LAYOUT_33 = [
             { value: '3', label: '5 minutes' }, { value: '4', label: '10 minutes' },
             { value: '5', label: 'Infinite' }
         ]
+    },
+    {
+        name: 'TEST', type: 'textfield', label: 'escTestLabel', placeholder: 'escTestPlaceholder'
     }
 ];
 
@@ -120,7 +120,7 @@ var BLHELI_S_SETTINGS_LAYOUT_32 = [
             { value: '3', label: '5 minutes' }, { value: '4', label: '10 minutes' },
             { value: '5', label: 'Infinite' }
         ]
-    }
+    },
 ];
 
 // layout 21, 14.5, 14.6, 14.7

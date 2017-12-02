@@ -126,7 +126,7 @@ var TextField = React.createClass({
                     type: "text",
                     name: this.props.name,
                     placeholder: chrome.i18n.getMessage(this.props.placeholder),
-                    value: this.props.value === 1 ? true : false,
+                    value: this.props.value,
                     onChange: this.handleChange
                 }),
                 React.createElement(
