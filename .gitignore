@@ -1,4 +1,12 @@
 .DS_STORE
+tabs/esc.js
+individual_settings.js
+flashing_helpers.js
+firmware_selector.js
+common_settings.js
+blheli_configurator.js
+base_components.js
+package-lock.json
 node_modules
 *~
 *.pyc

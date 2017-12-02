@@ -196,6 +196,12 @@
     "escBrakeOnStop": {
         "message": "Brake on Stop"
     },
+    "escTestLabel": {
+        "message": "Test Label"
+    },
+    "escTestPlaceholder": {
+        "message": "Test Placeholder"
+    },
     "escDemagCompensation": {
         "message": "Demag Compensation"
     },
