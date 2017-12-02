@@ -1,5 +1,5 @@
 .DS_STORE
-esc.js
+tabs/esc.js
 individual_settings.js
 flashing_helpers.js
 firmware_selector.js
