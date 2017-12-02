@@ -111,3 +111,39 @@ var Number = React.createClass({
         return this.props.value;
     }
 });
+
+var TextField = React.createClass({
+    displayName: "TextField",
+
+    render: function render() {
+        return React.createElement(
+            "div",
+            { className: "textfield" },
+            React.createElement(
+                "label",
+                null,
+                React.createElement("input", {
+                    type: "text",
+                    name: this.props.name,
+                    placeholder: chrome.i18n.getMessage(this.props.placeholder),
+                    value: this.props.value === 1 ? true : false,
+                    onChange: this.handleChange
+                }),
+                React.createElement(
+                    "span",
+                    { className: this.props.notInSync ? "not-in-sync" : "" },
+                    chrome.i18n.getMessage(this.props.label)
+                )
+            )
+        );
+    },
+    handleChange: function handleChange(component, value) {
+        this.props.onChange(component.props.name, value);
+    },
+    getDisplayValue: function getDisplayValue() {
+    //    if (this.props.offset && this.props.factor) {
+    //        return this.props.factor * this.props.value + this.props.offset;
+    //    }
+        return this.props.value;
+    }
+});

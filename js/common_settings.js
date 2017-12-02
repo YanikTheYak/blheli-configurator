@@ -97,11 +97,12 @@ var CommonSettings = React.createClass({
     },
     renderSetting: function renderSetting(settings, notInSync, desc) {
         switch (desc.type) {
-            case 'string':
+            case 'textfield':
                 {
-                    return React.createElement(Text, {
+                    return React.createElement(TextField, {
                         name: desc.name,
                         value: settings[desc.name],
+                        placeholder: desc.placeholder,
                         label: desc.label,
                         notInSync: notInSync,
                         onChange: this.handleChange
