@@ -62,7 +62,16 @@ var BLHELI_S_SETTINGS_LAYOUT_33 = [
         ]
     },
     {
-        name: 'TEST', type: 'textfield', label: 'escTestLabel', placeholder: 'escTestPlaceholder'
+        name: 'MUSIC_NOTES', type: 'textfield', label: 'escNotesLabel', placeholder: 'escNotesPlaceholder'
+    },
+    {
+        name: 'MUSIC_DURATION', type: 'textfield', label: 'escDurationLabel', placeholder: 'escDurationPlaceholder'
+    },
+    {
+        name: 'MUSIC_TUNEP1', type: 'textfield', label: 'escTuneP1Label', placeholder: 'escTuneP1Placeholder'
+    },
+    {
+        name: 'MUSIC_TUNEP2', type: 'textfield', label: 'escTuneP2Label', placeholder: 'escTuneP2Placeholder'
     }
 ];
 

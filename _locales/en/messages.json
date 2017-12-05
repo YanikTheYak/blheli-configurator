@@ -196,11 +196,29 @@
     "escBrakeOnStop": {
         "message": "Brake on Stop"
     },
-    "escTestLabel": {
-        "message": "Test Label"
+    "escNotesLabel": {
+        "message": "Available Notes"
     },
-    "escTestPlaceholder": {
-        "message": "Test Placeholder"
+    "escNotesPlaceholder": {
+        "message": "Notes"
+    },
+    "escDurationLabel": {
+        "message": "Available Durations"
+    },
+    "escDurationPlaceholder": {
+        "message": "Durations"
+    },
+    "escTuneP1Label": {
+        "message": "Tune Part 1"
+    },
+    "escTuneP1Placeholder": {
+        "message": "First 16 notes"
+    },
+    "escTuneP2Label": {
+        "message": "Tune Part 2"
+    },
+    "escTuneP2Placeholder": {
+        "message": "Second 16 notes"
     },
     "escDemagCompensation": {
         "message": "Demag Compensation"

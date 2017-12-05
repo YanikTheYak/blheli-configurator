@@ -191,9 +191,12 @@
     margin: 0 14px 5px 0;
     border: 1px solid silver;
     border-radius: 3px;
-    padding-left: 7px;    
+    padding-left: 7px;
 }
-
+.tab-esc .textfield {
+    margin-bottom: 10px;    
+}
+    
 .tab-esc .checkbox:last-child {
     border-bottom: none;
 }

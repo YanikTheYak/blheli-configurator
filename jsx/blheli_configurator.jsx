@@ -160,6 +160,11 @@ var Configurator = React.createClass({
         }
     },
     writeSetupImpl: async function(esc) {
+        if (Debug.enabled) {
+            var escSettingsDebug = blheliSettingsArray(this.state.escSettings[esc]);
+            saveFile(escSettingsDebug);
+            return;
+        }
         try {
             if (!this.state.escMetainfo[esc].available) {
                return;

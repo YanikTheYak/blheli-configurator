@@ -101,7 +101,7 @@ var TextField = React.createClass({
         );
     },            
     handleChange: function handleChange(component, value) {
-        this.props.onChange(component.props.name, value);
+        this.props.onChange(component.target.name, component.target.value);
     },
     getDisplayValue: function getDisplayValue() {
         return this.props.value;

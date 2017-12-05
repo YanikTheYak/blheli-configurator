@@ -27,7 +27,7 @@ var BLHELI_ATMEL_SK_ADDRESS_8           = 0x1C00
 var BLHELI_ATMEL_SK_ADDRESS_16          = 0x3C00
 var BLHELI_ATMEL_EEPROM_SIZE            = 0x0200
 
-var BLHELI_LAYOUT_SIZE = 0x70
+var BLHELI_LAYOUT_SIZE = 0x140
 var BLHELI_MIN_SUPPORTED_LAYOUT_REVISION = 0x13
 
 var BLHELI_S_MIN_LAYOUT_REVISION = 0x20
@@ -79,7 +79,10 @@ var BLHELI_LAYOUT = {
     MCU:                        {   offset: 0x50, size: 16   },
     NAME:                       {   offset: 0x60, size: 16   },
 
-    TEST:                       {   offset: 0x80, size: 16   },
+    MUSIC_NOTES:                {   offset: 0x100, size: 16   },
+    MUSIC_DURATION:             {   offset: 0x110, size: 16   },
+    MUSIC_TUNEP1:               {   offset: 0x120, size: 16   },
+    MUSIC_TUNEP2:               {   offset: 0x130, size: 16   }
 };
 
 function blheliModeToString(mode) {
