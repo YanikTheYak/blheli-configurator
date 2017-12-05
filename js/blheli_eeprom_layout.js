@@ -79,6 +79,7 @@ var BLHELI_LAYOUT = {
     MCU:                        {   offset: 0x50, size: 16   },
     NAME:                       {   offset: 0x60, size: 16   },
 
+    MUSIC:                      {   offset: 0x100, size: 16   },
     MUSIC_NOTES:                {   offset: 0x100, size: 16   },
     MUSIC_DURATION:             {   offset: 0x110, size: 16   },
     MUSIC_TUNEP1:               {   offset: 0x120, size: 16   },

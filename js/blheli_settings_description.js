@@ -62,17 +62,13 @@ var BLHELI_S_SETTINGS_LAYOUT_33 = [
         ]
     },
     {
-        name: 'MUSIC_NOTES', type: 'textfield', label: 'escNotesLabel', placeholder: 'escNotesPlaceholder'
+        name: 'MUSIC', type: 'enumdata', 
+        options: [
+            { value: '1', label: 'Test Tune', data:'[0x6E,0x22,0x2B,0x33,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00]' },
+            { value: '2', label: 'Imperial March', data:'[0x6E,0x22,0x2B,0x33,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00]' },
+        ],
+        label: 'escMusicSelect'
     },
-    {
-        name: 'MUSIC_DURATION', type: 'textfield', label: 'escDurationLabel', placeholder: 'escDurationPlaceholder'
-    },
-    {
-        name: 'MUSIC_TUNEP1', type: 'textfield', label: 'escTuneP1Label', placeholder: 'escTuneP1Placeholder'
-    },
-    {
-        name: 'MUSIC_TUNEP2', type: 'textfield', label: 'escTuneP2Label', placeholder: 'escTuneP2Placeholder'
-    }
 ];
 
 // layout 32, 16.0, 16.1, 16.2

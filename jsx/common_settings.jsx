@@ -102,6 +102,21 @@ var CommonSettings = React.createClass({
                     />
                 );
             }
+            case 'enumdata': {
+                // @todo redesign
+                var options = desc.options;
+                return (
+                    <SelectData
+                        name={desc.name}
+                        value={settings[desc.name]}
+                        options={options}
+                        label={desc.label}
+                        data={desc.data}
+                        notInSync={notInSync}
+                        onChange={this.handleChange}
+                    />
+                );
+            }
             case 'number': {
                 return (
                     <Number
