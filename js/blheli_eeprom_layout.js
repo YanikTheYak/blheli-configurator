@@ -79,7 +79,7 @@ var BLHELI_LAYOUT = {
     MCU:                        {   offset: 0x50, size: 16   },
     NAME:                       {   offset: 0x60, size: 16   },
 
-    MUSICDATA:                  {   offset: 0x100, size: 16   },
+    MUSICDATA:                  {   offset: 0x100, size: 64   },
 };
 
 function blheliModeToString(mode) {
@@ -105,6 +105,9 @@ function blheliSettingsObject(settingsUint8Array) {
                 object[prop] = (settingsUint8Array[setting.offset] << 8) | settingsUint8Array[setting.offset + 1];
             } else if (setting.size === 16) {
                 object[prop] = String.fromCharCode.apply(undefined, settingsUint8Array.subarray(setting.offset).subarray(0, 16)).trim();
+            } else if (setting.size === 64) {
+                if (!(typeof settingsUint8Array.subarray(setting.offset).subarray(0, 64) === 'string'))
+                    object[prop] = settingsUint8Array.subarray(setting.offset).subarray(0, 64);
             } else {
                 throw new Error('Logic error')
             }
@@ -127,6 +130,10 @@ function blheliSettingsArray(settingsObject) {
                 array[setting.offset] = (settingsObject[prop] >> 8) & 0xff;
                 array[setting.offset + 1] = (settingsObject[prop]) & 0xff;
             } else if (setting.size === 16) {
+                for (let i = 0, len = settingsObject[prop].length; i < setting.size; ++i) {
+                    array[setting.offset + i] = i < len ? settingsObject[prop].charCodeAt(i) : ' '.charCodeAt(0);
+                }
+            } else if (setting.size === 64) {
                 for (let i = 0, len = settingsObject[prop].length; i < setting.size; ++i) {
                     if (typeof settingsObject[prop] === 'string') {
                         array[setting.offset + i] = i < len ? settingsObject[prop].charCodeAt(i) : ' '.charCodeAt(0);
