@@ -79,11 +79,7 @@ var BLHELI_LAYOUT = {
     MCU:                        {   offset: 0x50, size: 16   },
     NAME:                       {   offset: 0x60, size: 16   },
 
-    MUSIC:                      {   offset: 0x100, size: 16   },
-    MUSIC_NOTES:                {   offset: 0x100, size: 16   },
-    MUSIC_DURATION:             {   offset: 0x110, size: 16   },
-    MUSIC_TUNEP1:               {   offset: 0x120, size: 16   },
-    MUSIC_TUNEP2:               {   offset: 0x130, size: 16   }
+    MUSICDATA:                  {   offset: 0x100, size: 16   },
 };
 
 function blheliModeToString(mode) {
@@ -132,7 +128,12 @@ function blheliSettingsArray(settingsObject) {
                 array[setting.offset + 1] = (settingsObject[prop]) & 0xff;
             } else if (setting.size === 16) {
                 for (let i = 0, len = settingsObject[prop].length; i < setting.size; ++i) {
-                    array[setting.offset + i] = i < len ? settingsObject[prop].charCodeAt(i) : ' '.charCodeAt(0);
+                    if (typeof settingsObject[prop] === 'string') {
+                        array[setting.offset + i] = i < len ? settingsObject[prop].charCodeAt(i) : ' '.charCodeAt(0);
+                    }
+                    else {  // Data Array
+                        array[setting.offset + i] = i < len ? settingsObject[prop][i] : 0;                        
+                    }
                 }
             } else {
                 throw new Error('Logic error')

@@ -70,7 +70,7 @@ var SelectData = React.createClass({
     },
     handleChange: function(e) {
         var index = parseInt(e.target.value);
-        this.props.onChange(e.target.name, index.toString().concat('|').concat(this.props.options[index].data));
+        this.props.onChange(e.target.name, parseInt(e.target.value), this.props.options[index-1].data); 
     }
 });
 

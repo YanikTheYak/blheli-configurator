@@ -13,10 +13,15 @@ var CommonSettings = React.createClass({
             </div>
         );
     },
-    handleChange: function(name, value) {        
+    handleChange: function(name, value, data) {        
         // @todo probably shouldn't alter props like this
         var escSettings = this.props.escSettings;
         escSettings.forEach(settings => settings[name] = value);
+        if (!(data == null))
+        {
+            escSettings.forEach(settings => settings[name.toString().concat("DATA")] = data);
+        }
+        
         this.props.onUserInput(escSettings);
     },
     renderControls: function() {
