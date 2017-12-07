@@ -196,6 +196,9 @@
     "escBrakeOnStop": {
         "message": "Brake on Stop"
     },
+    "escMusicSelect": {
+        "message": "Startup Music"
+    },
     "escNotesLabel": {
         "message": "Available Notes"
     },

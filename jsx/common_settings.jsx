@@ -13,10 +13,15 @@ var CommonSettings = React.createClass({
             </div>
         );
     },
-    handleChange: function(name, value) {        
+    handleChange: function(name, value, data) {        
         // @todo probably shouldn't alter props like this
         var escSettings = this.props.escSettings;
         escSettings.forEach(settings => settings[name] = value);
+        if (!(data == null))
+        {
+            escSettings.forEach(settings => settings[name.toString().concat("DATA")] = data);
+        }
+        
         this.props.onUserInput(escSettings);
     },
     renderControls: function() {
@@ -97,6 +102,21 @@ var CommonSettings = React.createClass({
                         value={settings[desc.name]}
                         options={options}
                         label={desc.label}
+                        notInSync={notInSync}
+                        onChange={this.handleChange}
+                    />
+                );
+            }
+            case 'enumdata': {
+                // @todo redesign
+                var options = desc.options;
+                return (
+                    <SelectData
+                        name={desc.name}
+                        value={settings[desc.name]}
+                        options={options}
+                        label={desc.label}
+                        data={desc.data}
                         notInSync={notInSync}
                         onChange={this.handleChange}
                     />

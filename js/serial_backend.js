@@ -99,7 +99,7 @@ $(document).ready(function () {
 });
 
 function onOpen(openInfo) {
-    if (openInfo) {
+    if (openInfo || Debug.enabled) {
         // update connected_to
         GUI.connected_to = GUI.connecting_to;
 

@@ -47,6 +47,33 @@ var Select = React.createClass({
     }
 });
 
+var SelectData = React.createClass({
+    render: function() {
+        return (
+            <div className="select">
+                <label>
+                    <select
+                        name={this.props.name}
+                        value={this.props.notInSync ? -1 : this.props.value}
+                        onChange={this.handleChange}
+                    >
+                        <option className="hidden" disabled selected value="-1" />
+                        {
+                            this.props.options.map(option => <option value={option.value} data-value2={option.data}>{option.label}</option>)
+                        }
+                    </select>
+                    <span className={this.props.notInSync ? "not-in-sync" : ""}>{chrome.i18n.getMessage(this.props.label)}</span>
+                </label>
+            </div>
+        );
+
+    },
+    handleChange: function(e) {
+        var index = parseInt(e.target.value);
+        this.props.onChange(e.target.name, parseInt(e.target.value), this.props.options[index-1].data); 
+    }
+});
+
 var Number = React.createClass({
     render: function() {
         return (
