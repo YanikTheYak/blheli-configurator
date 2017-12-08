@@ -273,15 +273,17 @@ var MSP = {
 
             bufView[5 + data.length] = checksum;
         } else {
-            bufferOut = new ArrayBuffer(6);
+            bufferOut = new ArrayBuffer(8);
             bufView = new Uint8Array(bufferOut);
-
-            bufView[0] = 36; // $
-            bufView[1] = 77; // M
-            bufView[2] = 60; // <
-            bufView[3] = 0; // data length
-            bufView[4] = code; // code
-            bufView[5] = bufView[3] ^ bufView[4]; // checksum
+////HACKED - DO NOT COMMIT THIS CODE
+            bufView[0] = 0x2F; // $
+            bufView[1] = 0x34; // M
+            bufView[2] = 0x00; // <
+            bufView[3] = 0x00; // data length
+            bufView[4] = 0x01; // code
+            bufView[5] = 0x00;
+            bufView[6] = 0x46;
+            bufView[7] = 0xd2;
         }
 
         // dev version 0.57 code below got recently changed due to the fact that queueing same MSP codes was unsupported
