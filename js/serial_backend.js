@@ -151,7 +151,7 @@ function onOpen(openInfo) {
             $('#tabs ul.mode-connected .tab_esc a').click();
         }
 
-        if (Debug.enabled) {
+        if (Debug.enabled || Debug.arduino) {
             ESC_CONFIG = { connectedESCs: 1 };
             initialized4Way();
             return;

@@ -12,14 +12,19 @@ var FirmwareSelector = React.createClass({
         }
 
         var type;
-        if (findMCU(this.props.signatureHint, this.props.supportedESCs.signatures[BLHELI_TYPES.BLHELI_S_SILABS])) {
-            type = BLHELI_TYPES.BLHELI_S_SILABS;
-        } else if (findMCU(this.props.signatureHint, this.props.supportedESCs.signatures[BLHELI_TYPES.SILABS])) {
-            type = BLHELI_TYPES.SILABS;
-        } else if (findMCU(this.props.signatureHint, this.props.supportedESCs.signatures[BLHELI_TYPES.ATMEL])) {
-            type = BLHELI_TYPES.ATMEL;
-        } else {
-            throw new Error('Unknown MCU signature: ' + this.props.signatureHint.toString(0x10));
+        if (Debug.arduino) {
+            type = type = BLHELI_TYPES.BLHELI_S_SILABS;
+        }
+        else {
+            if (findMCU(this.props.signatureHint, this.props.supportedESCs.signatures[BLHELI_TYPES.BLHELI_S_SILABS])) {
+                type = BLHELI_TYPES.BLHELI_S_SILABS;
+            } else if (findMCU(this.props.signatureHint, this.props.supportedESCs.signatures[BLHELI_TYPES.SILABS])) {
+                type = BLHELI_TYPES.SILABS;
+            } else if (findMCU(this.props.signatureHint, this.props.supportedESCs.signatures[BLHELI_TYPES.ATMEL])) {
+                type = BLHELI_TYPES.ATMEL;
+            } else {
+                throw new Error('Unknown MCU signature: ' + this.props.signatureHint.toString(0x10));
+            }
         }
 
         return {

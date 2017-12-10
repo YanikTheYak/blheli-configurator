@@ -2,6 +2,7 @@
 
 var Debug = {
     enabled: false,
+    arduino: true,
 
     getDummySettings: function(type) {
         var ret = blheliSettingsObject(new Uint8Array(BLHELI_LAYOUT_SIZE).fill(0xFF));
