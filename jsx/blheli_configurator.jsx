@@ -46,6 +46,29 @@ var Configurator = React.createClass({
         });
     },
     saveLog: () => saveFile(console.dump().join('\n')),
+    // Read settings, loop to read more than 256bytes
+    _4way_readSettings: async function() {
+        var settingsArray = {};
+        if (isSiLabs) {
+            begin_address = BLHELI_SILABS_EEPROM_OFFSET;
+        } else {
+            begin_address = 0;            
+        }
+        for (remaining_bytes=BLHELI_LAYOUT_SIZE; remaining_bytes > 0; remaining_bytes -= 256) {
+            if (remaining_bytes > 256)
+                bytesToRead = 256; // Only read 256 bytes at a time
+            else
+                bytesToRead = remaining_bytes; // Remaining bytes
+            if (isSiLabs) {
+                readArray = (await _4way.read(begin_address, bytesToRead)).params;
+            } else {
+                readArray = (await _4way.readEEprom(begin_address, bytesToRead)).params;
+            }
+            settingsArray.concat(readArray);
+            begin_address += bytesToRead;
+        }
+        return settingsArray;
+    },
     readSetup: async function() {
         GUI.log(chrome.i18n.getMessage('readSetupStarted'));
         $('a.connect').addClass('disabled');
@@ -118,11 +141,7 @@ var Configurator = React.createClass({
                 var isSiLabs = [ _4way_modes.SiLC2, _4way_modes.SiLBLB ].includes(interfaceMode),
                     settingsArray = null;
 
-                if (isSiLabs) {
-                    settingsArray = (await _4way.read(BLHELI_SILABS_EEPROM_OFFSET, BLHELI_LAYOUT_SIZE)).params;
-                } else {
-                    settingsArray = (await _4way.readEEprom(0, BLHELI_LAYOUT_SIZE)).params;
-                }
+                settingsArray = (await _4way_readSettings()).params;
 
                 const settings = blheliSettingsObject(settingsArray);
 
@@ -180,11 +199,7 @@ var Configurator = React.createClass({
             var isSiLabs = [ _4way_modes.SiLC2, _4way_modes.SiLBLB ].includes(interfaceMode),
                 readbackSettings = null;
 
-            if (isSiLabs) {
-                readbackSettings = (await _4way.read(BLHELI_SILABS_EEPROM_OFFSET, BLHELI_LAYOUT_SIZE)).params;
-            } else {
-                readbackSettings = (await _4way.readEEprom(0, BLHELI_LAYOUT_SIZE)).params;
-            }
+            readbackSettings = (await _4way_readSettings()).params;
 
             // Check for changes and perform write
             var escSettings = blheliSettingsArray(this.state.escSettings[esc]);
@@ -227,11 +242,7 @@ var Configurator = React.createClass({
                 }
             }
 
-            if (isSiLabs) {
-                readbackSettings = (await _4way.read(BLHELI_SILABS_EEPROM_OFFSET, BLHELI_LAYOUT_SIZE)).params;
-            } else {
-                readbackSettings = (await _4way.readEEprom(0, BLHELI_LAYOUT_SIZE)).params;
-            }
+            readbackSettings = (await _4way_readSettings()).params;
 
             if (!compare(escSettings, readbackSettings)) {
                 throw new Error('Failed to verify settings')
@@ -316,11 +327,8 @@ var Configurator = React.createClass({
         await selectInterfaceAndFlash(initFlashResponse);
 
         var settingsArray;
-        if (isAtmel) {
-            settingsArray = (await _4way.readEEprom(0, BLHELI_LAYOUT_SIZE)).params;
-        } else {
-            settingsArray = (await _4way.read(BLHELI_SILABS_EEPROM_OFFSET, BLHELI_LAYOUT_SIZE)).params;
-        }
+        settingsArray = (await _4way_readSettings()).params;
+
         // migrate settings from previous version if asked to
         const newSettings = blheliSettingsObject(settingsArray);
 
@@ -374,7 +382,7 @@ var Configurator = React.createClass({
             // @todo check device id
 
             // read current settings
-            return _4way.read(BLHELI_SILABS_EEPROM_OFFSET, BLHELI_LAYOUT_SIZE)
+            return (await _4way_readSettings()).params
             // check MCU and LAYOUT
             .then(checkESCAndMCU)
             // erase EEPROM page
@@ -406,7 +414,7 @@ var Configurator = React.createClass({
             const isSimonK = escMetainfo.interfaceMode === _4way_modes.AtmSK
             // @todo check device id
 
-            return _4way.readEEprom(0, BLHELI_LAYOUT_SIZE)
+            return (await _4way_readSettings()).params
             // check MCU and LAYOUT
             .then(checkESCAndMCU)
             // write **FLASH*FAILED** as NAME
@@ -644,7 +652,7 @@ var Configurator = React.createClass({
             escSettingArrayTmp.set(ascii2buf('**FLASH*FAILED**'), BLHELI_LAYOUT.NAME.offset)
 
             var promise = _4way.write(BLHELI_SILABS_EEPROM_OFFSET, escSettingArrayTmp)
-            .then(function(message) {
+            .then(function(message) { /* @TODO this may exceed 256 bytes */
                 return _4way.read(message.address, BLHELI_LAYOUT_SIZE)
             })
             .then(function(message) {
