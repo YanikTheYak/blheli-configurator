@@ -46,9 +46,12 @@ var Configurator = React.createClass({
         });
     },
     saveLog: () => saveFile(console.dump().join('\n')),
+    _4way_test: function () {
+        return 5;
+    },
     // Read settings, loop to read more than 256bytes
     _4way_readSettings: async function() {
-        var settingsArray = {};
+        var settingsArray = [];
         if (isSiLabs) {
             begin_address = BLHELI_SILABS_EEPROM_OFFSET;
         } else {
@@ -106,7 +109,8 @@ var Configurator = React.createClass({
     },
     readSetupAll: async function() {
         var escSettings = [],
-            escMetainfo = [];
+            escMetainfo = [],
+            settingsArray = [];
 
         if (Debug.enabled) {
             escSettings = [ Debug.getDummySettings(BLHELI_TYPES.BLHELI_S_SILABS) ];
@@ -141,7 +145,7 @@ var Configurator = React.createClass({
                 var isSiLabs = [ _4way_modes.SiLC2, _4way_modes.SiLBLB ].includes(interfaceMode),
                     settingsArray = null;
 
-                settingsArray = (await _4way_readSettings()).params;
+                settingsArray = (await this._4way_readSettings()).params;
 
                 const settings = blheliSettingsObject(settingsArray);
 
@@ -189,6 +193,8 @@ var Configurator = React.createClass({
                return;
             }
 
+            var readbackSettings = [];
+
             // Ask 4way interface to initialize target ESC for flashing
             const message = await _4way.initFlash(esc);
             // Remember interface mode and read settings
@@ -199,7 +205,7 @@ var Configurator = React.createClass({
             var isSiLabs = [ _4way_modes.SiLC2, _4way_modes.SiLBLB ].includes(interfaceMode),
                 readbackSettings = null;
 
-            readbackSettings = (await _4way_readSettings()).params;
+            readbackSettings = (await this._4way_readSettings()).params;
 
             // Check for changes and perform write
             var escSettings = blheliSettingsArray(this.state.escSettings[esc]);
@@ -242,7 +248,7 @@ var Configurator = React.createClass({
                 }
             }
 
-            readbackSettings = (await _4way_readSettings()).params;
+            readbackSettings = (await this._4way_readSettings()).params;
 
             if (!compare(escSettings, readbackSettings)) {
                 throw new Error('Failed to verify settings')
@@ -327,7 +333,7 @@ var Configurator = React.createClass({
         await selectInterfaceAndFlash(initFlashResponse);
 
         var settingsArray;
-        settingsArray = (await _4way_readSettings()).params;
+        settingsArray = (await this._4way_readSettings()).params;
 
         // migrate settings from previous version if asked to
         const newSettings = blheliSettingsObject(settingsArray);
@@ -382,7 +388,7 @@ var Configurator = React.createClass({
             // @todo check device id
 
             // read current settings
-            return (await _4way_readSettings()).params
+            return this._4way_readSettings()
             // check MCU and LAYOUT
             .then(checkESCAndMCU)
             // erase EEPROM page
@@ -414,7 +420,7 @@ var Configurator = React.createClass({
             const isSimonK = escMetainfo.interfaceMode === _4way_modes.AtmSK
             // @todo check device id
 
-            return (await _4way_readSettings()).params
+            return this._4way_readSettings()
             // check MCU and LAYOUT
             .then(checkESCAndMCU)
             // write **FLASH*FAILED** as NAME
