@@ -46,12 +46,10 @@ var Configurator = React.createClass({
         });
     },
     saveLog: () => saveFile(console.dump().join('\n')),
-    _4way_test: function () {
-        return 5;
-    },
     // Read settings, loop to read more than 256bytes
-    _4way_readSettings: async function() {
+    _4way_readSettings: async function(isSiLabs) {
         var settingsArray = [];
+        var bytesToRead, begin_address, readArray, remaining_bytes;
         if (isSiLabs) {
             begin_address = BLHELI_SILABS_EEPROM_OFFSET;
         } else {
@@ -145,7 +143,7 @@ var Configurator = React.createClass({
                 var isSiLabs = [ _4way_modes.SiLC2, _4way_modes.SiLBLB ].includes(interfaceMode),
                     settingsArray = null;
 
-                settingsArray = (await this._4way_readSettings()).params;
+                settingsArray = (await this._4way_readSettings(isSiLabs)).params;
 
                 const settings = blheliSettingsObject(settingsArray);
 
